@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "export ENV=test&&mocha --timeout 30000 --reporter mochawesome --reporter-options reportDir=report -r ts-node/register test/specs/test.ts"
+    "test": "export ENV=test&&mocha --timeout 30000 --reporter mochawesome --reporter-options reportDir=report -r ts-node/register test/specs/*.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@types/chai": "^4.3.5",
     "@types/chalk": "^2.2.0",
     "@types/mocha": "^10.0.1",

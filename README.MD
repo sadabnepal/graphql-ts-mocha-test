@@ -1,10 +1,11 @@
-# GrapgQL API Automation Test framework
+# GraphQL API Automation Test framework
 
 API Test Automation is mocha framework to perform GraphQL API testing using supertest TypeScript library.
+![header](./samples//GraphQL_banner.png)
 
 ## Requirements:
 
-[![NodeJs](https://img.shields.io/badge/-NodeJS%20v12%20OR%20later-%23339933?logo=npm)](https://nodejs.org/en/download/)
+[![NodeJs](https://img.shields.io/badge/-NodeJS-%23339933?logo=npm)](https://nodejs.org/en/download/)
 [![VSCode](https://img.shields.io/badge/-Visual%20Studio%20Code-%233178C6?logo=visual-studio-code)](https://code.visualstudio.com/download)
 
 ## Getting Started:
@@ -25,7 +26,8 @@ npm install
 API Sources
 
 ```ini
-https://rickandmortyapi.com/graphql
+https://demo.vendure.io/shop-api [GraphQl]
+https://demo.vendure.io/ [web app]
 ```
 
 Run tests and Generate Report
@@ -48,6 +50,7 @@ npm test  [run all tests]
 ```ini
 ├───.vscode
 |    └───settings.json
+├───samples
 ├───test
 |    ├───env
 |    ├───helper
@@ -64,4 +67,4 @@ npm test  [run all tests]
 
 ## Sample Report:
 
-![image](./report.png)
+![image](./samples/report.png)

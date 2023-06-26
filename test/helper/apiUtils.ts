@@ -1,9 +1,9 @@
 import supertest from 'supertest';
 import { logRequest, logResponse } from './logger';
 
-export const graphQlAPI = async (url: string, data: {}, logs?: { logRequest?: boolean, logResponse?: boolean }) => {
+export const graphQlAPI = async (url: string, schema: {}, logs?: { logRequest?: boolean, logResponse?: boolean }) => {
     const request = supertest(url);
-    const gqlData = { query: data };
+    const gqlData = { query: schema };
 
     if (logs?.logRequest) logRequest(url, gqlData);
 
