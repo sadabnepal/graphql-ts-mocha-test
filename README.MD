@@ -1,6 +1,5 @@
 # GraphQL API Automation Test framework
 
-API Test Automation is mocha framework to perform GraphQL API testing using supertest TypeScript library.
 ![header](./samples//GraphQL_banner.png)
 
 ## Requirements:
