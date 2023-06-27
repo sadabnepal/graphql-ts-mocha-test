@@ -40,7 +40,8 @@ npm test  [run all tests]
     - GraphQL API Testing
     - Request and Response log to report
     - Multi environment support using dotenv
-    - Supertest, Mocha, TypesScript with mochawesome report
+    - Type support for better code intellisense
+    - Supertest and Axios api test boilerplate codes
 
 ## Folder structure:
 

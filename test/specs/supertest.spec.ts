@@ -2,17 +2,17 @@ import { faker } from '@faker-js/faker';
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { URL } from '../env/manager';
-import { graphQlAPI } from '../helper/apiUtils';
+import { callGraphQlAPIUsingSuperTest } from '../helper/apiUtils';
 import { registerCustomerAccount } from '../payload/mutation';
 import { getProductByName, getProducts } from '../payload/queries';
 import { CustomerDetailsType } from '../types/customer';
 
-describe('test vendure shop api', function () {
+describe('test graphql api using supertest', function () {
 
     describe('query data', function () {
 
         it('should fetch all products', async function () {
-            const response = await graphQlAPI(URL, getProducts, { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingSuperTest(URL, getProducts, { logRequest: true, logResponse: true, mochaContext: this });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.products.items).to.have.length.greaterThan(0);
@@ -20,7 +20,7 @@ describe('test vendure shop api', function () {
 
         it('should fetch product using query parameter', async function () {
             const productName = "Laptop";
-            const response = await graphQlAPI(URL, getProductByName(productName), { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingSuperTest(URL, getProductByName(productName), { logRequest: true, logResponse: true, mochaContext: this });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.products.items).to.have.length(1);
@@ -45,14 +45,10 @@ describe('test vendure shop api', function () {
                 password: faker.internet.password()
             }
 
-            const response = await graphQlAPI(URL, registerCustomerAccount(customerData), { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingSuperTest(URL, registerCustomerAccount(customerData), { logRequest: true, logResponse: true, mochaContext: this });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.registerCustomerAccount.success).equal(true)
-        });
-
-        it.skip('should update customer', async function () {
-            //TODO: add code to update customer
         });
 
     });
