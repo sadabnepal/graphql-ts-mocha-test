@@ -37,12 +37,10 @@ npm test  [run all tests]
 
 ## Key Features:
 
-    - Mocha framework
-    - Supertest library
-    - Mochawesome Report
     - GraphQL API Testing
-    - Mocha framework to organize tests
+    - Request and Response log to report
     - Multi environment support using dotenv
+    - Supertest, Mocha, TypesScript with mochawesome report
 
 ## Folder structure:
 
@@ -54,13 +52,13 @@ npm test  [run all tests]
 |    ├───env
 |    ├───helper
 |    ├───helper
-|    ├───queries
-|    └───specs
+|    ├───payload
+|    ├───specs
+|    └───types
 ├───.gitignore
 ├───package-lock.json
 ├───package.json
 ├───README.md
-├───report.png
 └───tsconfig.json
 ```
 

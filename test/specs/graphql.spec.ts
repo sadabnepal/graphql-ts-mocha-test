@@ -7,20 +7,20 @@ import { registerCustomerAccount } from '../payload/mutation';
 import { getProductByName, getProducts } from '../payload/queries';
 import { CustomerDetailsType } from '../types/customer';
 
-describe('test vendure shop api', () => {
+describe('test vendure shop api', function () {
 
-    describe('query data', () => {
+    describe('query data', function () {
 
-        it('should fetch all products', async () => {
-            const response = await graphQlAPI(URL, getProducts, { logRequest: true, logResponse: true });
+        it('should fetch all products', async function () {
+            const response = await graphQlAPI(URL, getProducts, { logRequest: true, logResponse: true, mochaContext: this });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.products.items).to.have.length.greaterThan(0);
         });
 
-        it('should fetch product using query parameter', async () => {
+        it('should fetch product using query parameter', async function () {
             const productName = "Laptop";
-            const response = await graphQlAPI(URL, getProductByName(productName), { logRequest: true, logResponse: true });
+            const response = await graphQlAPI(URL, getProductByName(productName), { logRequest: true, logResponse: true, mochaContext: this });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.products.items).to.have.length(1);
@@ -30,9 +30,9 @@ describe('test vendure shop api', () => {
 
     });
 
-    describe('mutate data', () => {
+    describe('mutate data', function () {
 
-        it('should register user using mutation', async () => {
+        it('should register user using mutation', async function () {
             const firstName = faker.person.firstName();
             const lastName = faker.person.lastName();
 
@@ -45,13 +45,13 @@ describe('test vendure shop api', () => {
                 password: faker.internet.password()
             }
 
-            const response = await graphQlAPI(URL, registerCustomerAccount(customerData), { logRequest: true, logResponse: true });
+            const response = await graphQlAPI(URL, registerCustomerAccount(customerData), { logRequest: true, logResponse: true, mochaContext: this });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.registerCustomerAccount.success).equal(true)
         });
 
-        it.skip('should update customer', async () => {
+        it.skip('should update customer', async function () {
             //TODO: add code to update customer
         });
 

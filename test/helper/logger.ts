@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import addContext from 'mochawesome/addContext';
 import prettyjson from 'prettyjson';
 
 const color = {
@@ -10,16 +11,18 @@ const color = {
     response: chalk.hex('#fcf805')
 };
 
-export const logRequest = (url: string, data: any) => {
+export const logRequest = (url: string, data: any, mochaContext?: any) => {
     console.log(color.request(`\n<<<<<<<<<<< SENDING REQUEST <<<<<<<<<<<`));
     console.log(color.request(`\nRequest URL:\n`, prettyjson.render(url)))
     console.log(color.info(`\nRequest Data:\n`, prettyjson.render(data)))
+    addContext(mochaContext, { title: "schema", value: data });
 }
 
-export const logResponse = (status: number, data: any) => {
+export const logResponse = (status: number, data: any, mochaContext?: any) => {
     console.log(color.response(`\n>>>>>>>>>> RECEIVING RESPONSE >>>>>>>>>>`));
     console.log(color.info(`\nStatus Code: ${status}`))
     console.log(color.request(`\nResponse Data: \n`, prettyjson.render(data)))
+    addContext(mochaContext, { title: "response", value: data });
 }
 
 
