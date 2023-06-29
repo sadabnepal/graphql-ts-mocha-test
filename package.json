@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "export ENV=test&&mocha --timeout 30000 --reporter mochawesome --reporter-options reportDir=report --reporter-options charts=true  --reporter-options code=false -r ts-node/register test/specs/**.ts",
-    "super:test": "export ENV=test&&mocha --timeout 30000 --reporter mochawesome --reporter-options reportDir=report --reporter-options charts=true  --reporter-options code=false -r ts-node/register test/specs/supertest.spec.ts",
-    "axios:test": "export ENV=test&&mocha --timeout 30000 --reporter mochawesome --reporter-options reportDir=report --reporter-options charts=true  --reporter-options code=false -r ts-node/register test/specs/axios.spec.ts"
+    "test": "export ENV=test&&mocha --timeout 30000 --reporter mochawesome --reporter-options reportDir=report,charts=true,code=false -r ts-node/register test/specs/**.ts",
+    "super:test": "export ENV=test&&mocha --timeout 30000 --reporter mochawesome --reporter-options reportDir=report,charts=true,code=false -r ts-node/register test/specs/supertest.spec.ts",
+    "axios:test": "export ENV=test&&mocha --timeout 30000 --reporter mochawesome --reporter-options reportDir=report,charts=true,code=false -r ts-node/register test/specs/axios.spec.ts"
   },
   "keywords": [],
   "author": "",
