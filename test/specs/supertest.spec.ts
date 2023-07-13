@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { URL } from '../env/manager';
 import { callGraphQlAPIUsingSuperTest } from '../helper/apiUtils';
+import { getProductsWithFragment } from '../payload/fragments';
 import { registerCustomerAccount } from '../payload/mutation';
 import { getProductByName, getProducts } from '../payload/queries';
 import { CustomerDetailsType } from '../types/customer';
@@ -13,6 +14,13 @@ describe('test graphql api using supertest', function () {
 
         it('should fetch all products', async function () {
             const response = await callGraphQlAPIUsingSuperTest(URL, getProducts, { logRequest: true, logResponse: true, mochaContext: this });
+
+            expect(response.statusCode).equal(200);
+            expect(response.body.data.products.items).to.have.length.greaterThan(0);
+        });
+
+        it('should fetch all products using fragments', async function () {
+            const response = await callGraphQlAPIUsingSuperTest(URL, getProductsWithFragment, { logRequest: true, logResponse: true, mochaContext: this });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.products.items).to.have.length.greaterThan(0);
