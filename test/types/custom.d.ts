@@ -6,3 +6,10 @@ export type CustomerDetailsType = {
     phoneNumber?: string,
     password?: string
 }
+
+export type apiOptions = {
+    schema: string,
+    logRequest?: boolean,
+    logResponse?: boolean,
+    mochaContext?: Mocha.Context
+}

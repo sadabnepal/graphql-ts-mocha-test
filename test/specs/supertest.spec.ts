@@ -1,26 +1,35 @@
 import { faker } from '@faker-js/faker';
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { URL } from '../env/manager';
 import { callGraphQlAPIUsingSuperTest } from '../helper/apiUtils';
 import { getProductsWithFragment } from '../payload/fragments';
 import { registerCustomerAccount } from '../payload/mutation';
 import { getProductByName, getProducts } from '../payload/queries';
-import { CustomerDetailsType } from '../types/customer';
+import { CustomerDetailsType } from '../types/custom';
 
 describe('test graphql api using supertest', function () {
 
     describe('query data', function () {
 
         it('should fetch all products', async function () {
-            const response = await callGraphQlAPIUsingSuperTest(URL, getProducts, { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingSuperTest({
+                schema: getProducts,
+                logRequest: true,
+                logResponse: true,
+                mochaContext: this
+            });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.products.items).to.have.length.greaterThan(0);
         });
 
         it('should fetch all products using fragments', async function () {
-            const response = await callGraphQlAPIUsingSuperTest(URL, getProductsWithFragment, { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingSuperTest({
+                schema: getProductsWithFragment,
+                logRequest: true,
+                logResponse: true,
+                mochaContext: this
+            });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.products.items).to.have.length.greaterThan(0);
@@ -28,7 +37,12 @@ describe('test graphql api using supertest', function () {
 
         it('should fetch product using query parameter', async function () {
             const productName = "Laptop";
-            const response = await callGraphQlAPIUsingSuperTest(URL, getProductByName(productName), { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingSuperTest({
+                schema: getProductByName(productName),
+                logRequest: true,
+                logResponse: true,
+                mochaContext: this
+            });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.products.items).to.have.length(1);
@@ -53,7 +67,12 @@ describe('test graphql api using supertest', function () {
                 password: faker.internet.password()
             }
 
-            const response = await callGraphQlAPIUsingSuperTest(URL, registerCustomerAccount(customerData), { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingSuperTest({
+                schema: registerCustomerAccount(customerData),
+                logRequest: true,
+                logResponse: true,
+                mochaContext: this
+            });
 
             expect(response.statusCode).equal(200);
             expect(response.body.data.registerCustomerAccount.success).equal(true)

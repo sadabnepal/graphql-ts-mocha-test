@@ -1,24 +1,33 @@
 import { faker } from '@faker-js/faker';
 import { expect } from 'chai';
-import { URL } from '../env/manager';
 import { callGraphQlAPIUsingAxios } from '../helper/apiUtils';
 import { getProductsWithFragment } from '../payload/fragments';
 import { registerCustomerAccount } from '../payload/mutation';
 import { getProductByName, getProducts } from '../payload/queries';
-import { CustomerDetailsType } from '../types/customer';
+import { CustomerDetailsType } from '../types/custom';
 
 describe('test graphql api using axios', () => {
 
     describe('query data', function () {
         it('should fetch all products', async function () {
-            const response = await callGraphQlAPIUsingAxios(URL, getProducts, { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingAxios({
+                schema: getProducts,
+                logRequest: true,
+                logResponse: true,
+                mochaContext: this
+            });
 
             expect(response.status).equal(200);
             expect(response.data.data.products.items).to.have.length.greaterThan(0);
         });
 
         it('should fetch all products using fragments', async function () {
-            const response = await callGraphQlAPIUsingAxios(URL, getProductsWithFragment, { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingAxios({
+                schema: getProductsWithFragment,
+                logRequest: true,
+                logResponse: true,
+                mochaContext: this
+            });
 
             expect(response.status).equal(200);
             expect(response.data.data.products.items).to.have.length.greaterThan(0);
@@ -26,7 +35,12 @@ describe('test graphql api using axios', () => {
 
         it('should fetch products by name', async function () {
             let productName = "Laptop";
-            const response = await callGraphQlAPIUsingAxios(URL, getProductByName(productName), { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingAxios({
+                schema: getProductByName(productName),
+                logRequest: true,
+                logResponse: true,
+                mochaContext: this
+            });
 
             expect(response.status).equal(200)
             expect(response.data.data.products.items).to.have.length(1)
@@ -48,7 +62,12 @@ describe('test graphql api using axios', () => {
                 password: faker.internet.password()
             }
 
-            const response = await callGraphQlAPIUsingAxios(URL, registerCustomerAccount(customerData), { logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingAxios({
+                schema: registerCustomerAccount(customerData),
+                logRequest: true,
+                logResponse: true,
+                mochaContext: this
+            });
 
             expect(response.status).equal(200);
             expect(response.data.data.registerCustomerAccount.success).equal(true)

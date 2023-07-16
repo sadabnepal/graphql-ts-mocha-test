@@ -1,4 +1,4 @@
-import { CustomerDetailsType } from '../types/customer';
+import { CustomerDetailsType } from '../types/custom';
 
 export const registerCustomerAccount = (customer: CustomerDetailsType) => {
   return `mutation {
