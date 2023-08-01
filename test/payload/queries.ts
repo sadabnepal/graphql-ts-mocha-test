@@ -19,3 +19,15 @@ export const getProductByName = (productName: string) => {
     }
   }`;
 }
+
+export const getProductWithVariable = () => {
+  return `query ($product: String) {
+    products(options: {filter: {name: {eq: $product}}}) {
+      totalItems
+      items {
+        id
+        name
+      }
+    }
+  }`;
+}

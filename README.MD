@@ -1,5 +1,5 @@
 # GraphQL API Automation Test framework
-
+This is boilerplate project to show how we can automate graphql api using supertest | axios | pactum
 ![header](./samples//GraphQL_banner.png)
 
 ## Requirements:

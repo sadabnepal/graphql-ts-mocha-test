@@ -13,3 +13,11 @@ export type apiOptions = {
     logResponse?: boolean,
     mochaContext?: Mocha.Context
 }
+
+export type apiPactumOptions = {
+    schema: string,
+    variables?: {},
+    logRequest?: boolean,
+    logResponse?: boolean,
+    mochaContext?: Mocha.Context
+}

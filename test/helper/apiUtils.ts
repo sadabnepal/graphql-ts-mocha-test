@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { spec } from 'pactum';
 import supertest from 'supertest';
 import { URL } from '../env/manager';
-import { apiOptions } from '../types/custom';
-import { logRequest, logResponse } from './logger';
+import { apiOptions, apiPactumOptions } from '../types/custom';
+import { logRequest, logRequestPactum, logResponse, logResponsePactum } from './logger';
 
 export const callGraphQlAPIUsingSuperTest = async (options: apiOptions) => {
     const request = supertest(URL);
@@ -33,4 +34,16 @@ export const callGraphQlAPIUsingAxios = async (options: apiOptions) => {
 
     if (options?.logResponse && options?.mochaContext) logResponse(response.status, response.data, options?.mochaContext)
     return response;
+}
+
+export const callGraphQlAPIUsingPactum = async (option: apiPactumOptions) => {
+    if (option?.logRequest) logRequestPactum(URL, option.schema, { variables: option.variables, mochaContext: option?.mochaContext });
+
+    let response = await spec().post(URL)
+        .withGraphQLQuery(option.schema)
+        .withGraphQLVariables(option.variables ? option.variables : {})
+        .expectStatus(200);
+
+    if (option?.logResponse) logResponsePactum(response.statusCode, response.text, option?.mochaContext);
+    return JSON.parse(response.text);
 }
