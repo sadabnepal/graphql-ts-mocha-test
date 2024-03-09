@@ -11,34 +11,34 @@ const color = {
     response: chalk.hex('#fcf805')
 };
 
-export const logRequest = (url: string, data: any, mochaContext?: any) => {
+export const logRequest = (url: string, data: string, mochaContext: Mocha.Context) => {
     console.log(color.request(`\n<<<<<<<<<<< SENDING REQUEST <<<<<<<<<<<`));
-    console.log(color.request(`\nRequest URL:\n`, prettyjson.render(url)))
-    console.log(color.info(`\nRequest Data:\n`, prettyjson.render(data)))
-    addContext(mochaContext, { title: "schema", value: data });
-}
+    console.log(color.request(`\nRequest URL:\n`, prettyjson.render(url)));
+    console.log(color.info(`\nRequest Data:\n`, prettyjson.render(data)));
+    addContext(mochaContext, { title: 'schema', value: data });
+};
 
-export const logResponse = (status: number, data: any, mochaContext?: any) => {
+export const logResponse = (status: number, data: string, mochaContext: Mocha.Context) => {
     console.log(color.response(`\n>>>>>>>>>> RECEIVING RESPONSE >>>>>>>>>>`));
-    console.log(color.info(`\nStatus Code: ${status}`))
-    console.log(color.request(`\nResponse Data: \n`, prettyjson.render(data)))
-    addContext(mochaContext, { title: "response", value: data });
-}
+    console.log(color.info(`\nStatus Code: ${status}`));
+    console.log(color.request(`\nResponse Data: \n`, prettyjson.render(data)));
+    addContext(mochaContext, { title: 'response', value: data });
+};
 
-export const logRequestPactum = (url: string, data: any, option?: { variables?: any, mochaContext?: Mocha.Context }) => {
+export const logRequestPactum = (url: string, data: string, option?: { variables?: object, mochaContext?: Mocha.Context }) => {
     console.log(color.request(`\n<<<<<<<<<<< SENDING REQUEST <<<<<<<<<<<`));
     console.log(color.request(`\nRequest URL:\n`, url));
     console.log(color.info(`\nRequest Data:\n`, data));
-    if (option && option.mochaContext) addContext(option.mochaContext, { title: "schema", value: data });
-    if (option && option.variables && option.mochaContext) addContext(option.mochaContext, { title: "variables", value: option.variables });
-}
+    if (option && option.mochaContext) addContext(option.mochaContext, { title: 'schema', value: data });
+    if (option && option.variables && option.mochaContext) addContext(option.mochaContext, { title: 'variables', value: option.variables });
+};
 
-export const logResponsePactum = (status: number, data: any, mochaContext?: any) => {
+export const logResponsePactum = (status: number, data: string, mochaContext: Mocha.Context) => {
     console.log(color.response(`\n>>>>>>>>>> RECEIVING RESPONSE >>>>>>>>>>`));
-    console.log(color.info(`\nStatus Code: ${status}`))
-    console.log(color.response(`\nResponse Data: \n`, data))
-    addContext(mochaContext, { title: "response", value: JSON.parse(data) });
-}
+    console.log(color.info(`\nStatus Code: ${status}`));
+    console.log(color.response(`\nResponse Data: \n`, data));
+    addContext(mochaContext, { title: 'response', value: JSON.parse(data) });
+};
 
 
 /**

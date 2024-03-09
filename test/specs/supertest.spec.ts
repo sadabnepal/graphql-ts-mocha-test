@@ -36,7 +36,7 @@ describe('test graphql api using supertest', function () {
         });
 
         it('should fetch product using query parameter', async function () {
-            const productName = "Laptop";
+            const productName = 'Laptop';
             const response = await callGraphQlAPIUsingSuperTest({
                 schema: getProductByName(productName),
                 logRequest: true,
@@ -48,7 +48,7 @@ describe('test graphql api using supertest', function () {
             expect(response.body.data.products.items).to.have.length(1);
             expect(response.body.data.products.totalItems).equal(1);
             expect(response.body.data.products.items[0].name).equal(productName);
-        })
+        });
 
     });
 
@@ -65,7 +65,7 @@ describe('test graphql api using supertest', function () {
                 lastName: lastName,
                 phoneNumber: faker.phone.number(),
                 password: faker.internet.password()
-            }
+            };
 
             const response = await callGraphQlAPIUsingSuperTest({
                 schema: registerCustomerAccount(customerData),
@@ -75,7 +75,7 @@ describe('test graphql api using supertest', function () {
             });
 
             expect(response.statusCode).equal(200);
-            expect(response.body.data.registerCustomerAccount.success).equal(true)
+            expect(response.body.data.registerCustomerAccount.success).equal(true);
         });
 
     });

@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import { expect } from "chai";
-import { callGraphQlAPIUsingPactum } from "../helper/apiUtils";
-import { getProductsWithFragment } from "../payload/fragments";
+import { expect } from 'chai';
+import { callGraphQlAPIUsingPactum } from '../helper/apiUtils';
+import { getProductsWithFragment } from '../payload/fragments';
 import { registerCustomerAccount } from '../payload/mutation';
-import { getProductByName, getProductWithVariable, getProducts } from "../payload/queries";
+import { getProductByName, getProductWithVariable, getProducts } from '../payload/queries';
 import { CustomerDetailsType } from '../types/custom';
 
 describe('test graphql api using pactum', function () {
@@ -11,7 +11,7 @@ describe('test graphql api using pactum', function () {
     describe('query product', function () {
 
         it('should query product', async function () {
-            let response = await callGraphQlAPIUsingPactum({ schema: getProducts, logRequest: true, logResponse: true, mochaContext: this });
+            const response = await callGraphQlAPIUsingPactum({ schema: getProducts, logRequest: true, logResponse: true, mochaContext: this });
 
             expect(response.data.products.totalItems).to.be.greaterThan(0);
             expect(response.data.products.items).to.have.length.greaterThan(0);
@@ -29,19 +29,19 @@ describe('test graphql api using pactum', function () {
         });
 
         it('should fetch products by name', async function () {
-            let productName = "Laptop";
+            const productName = 'Laptop';
             const response = await callGraphQlAPIUsingPactum({
                 schema: getProductByName(productName),
                 logRequest: true, logResponse: true,
                 mochaContext: this
             });
 
-            expect(response.data.products.items).to.have.length(1)
+            expect(response.data.products.items).to.have.length(1);
             expect(response.data.products.items[0].name).equal(productName);
         });
 
         it('should fetch products using graphql query param', async function () {
-            let productName = "Laptop";
+            const productName = 'Laptop';
             const response = await callGraphQlAPIUsingPactum({
                 schema: getProductWithVariable(),
                 variables: { product: productName },
@@ -49,7 +49,7 @@ describe('test graphql api using pactum', function () {
                 mochaContext: this
             });
 
-            expect(response.data.products.items).to.have.length(1)
+            expect(response.data.products.items).to.have.length(1);
             expect(response.data.products.items[0].name).equal(productName);
         });
 
@@ -68,7 +68,7 @@ describe('test graphql api using pactum', function () {
                 lastName: lastName,
                 phoneNumber: faker.phone.number(),
                 password: faker.internet.password()
-            }
+            };
 
             const response = await callGraphQlAPIUsingPactum({
                 schema: registerCustomerAccount(customerData),
@@ -77,7 +77,7 @@ describe('test graphql api using pactum', function () {
                 mochaContext: this
             });
 
-            expect(response.data.registerCustomerAccount.success).equal(true)
+            expect(response.data.registerCustomerAccount.success).equal(true);
         });
 
     });

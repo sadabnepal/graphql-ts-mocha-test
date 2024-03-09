@@ -12,18 +12,18 @@ export const callGraphQlAPIUsingSuperTest = async (options: apiOptions) => {
     if (options?.logRequest && options?.mochaContext) logRequest(URL, options.schema, options?.mochaContext);
 
     const response = await request
-        .post("")
+        .post('')
         .send(gqlData)
         .disableTLSCerts();
 
-    if (options?.logResponse && options?.mochaContext) logResponse(response.statusCode, response.body, options?.mochaContext)
+    if (options?.logResponse && options?.mochaContext) logResponse(response.statusCode, response.body, options?.mochaContext);
     return response;
-}
+};
 
 export const callGraphQlAPIUsingAxios = async (options: apiOptions) => {
     if (options?.logRequest && options?.mochaContext) logRequest(URL, options.schema, options?.mochaContext);
 
-    let config = {
+    const config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: URL,
@@ -32,18 +32,20 @@ export const callGraphQlAPIUsingAxios = async (options: apiOptions) => {
     };
     const response = await axios.request(config);
 
-    if (options?.logResponse && options?.mochaContext) logResponse(response.status, response.data, options?.mochaContext)
+    if (options?.logResponse && options?.mochaContext) logResponse(response.status, response.data, options?.mochaContext);
     return response;
-}
+};
 
 export const callGraphQlAPIUsingPactum = async (option: apiPactumOptions) => {
-    if (option?.logRequest) logRequestPactum(URL, option.schema, { variables: option.variables, mochaContext: option?.mochaContext });
+    if (option?.logRequest && option?.variables && option?.mochaContext)
+        logRequestPactum(URL, option.schema, { variables: option.variables, mochaContext: option?.mochaContext });
 
-    let response = await spec().post(URL)
+    const response = await spec().post(URL)
         .withGraphQLQuery(option.schema)
         .withGraphQLVariables(option.variables ? option.variables : {})
         .expectStatus(200);
 
-    if (option?.logResponse) logResponsePactum(response.statusCode, response.text, option?.mochaContext);
+    if (option?.logResponse && option.mochaContext)
+        logResponsePactum(response.statusCode, response.text, option?.mochaContext);
     return JSON.parse(response.text);
-}
+};

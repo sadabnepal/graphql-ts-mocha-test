@@ -1,4 +1,4 @@
-export type CustomerDetailsType = {
+export interface CustomerDetailsType {
     emailAddress: string,
     title?: string,
     firstName?: string,
@@ -7,16 +7,16 @@ export type CustomerDetailsType = {
     password?: string
 }
 
-export type apiOptions = {
+export interface apiOptions {
     schema: string,
     logRequest?: boolean,
     logResponse?: boolean,
     mochaContext?: Mocha.Context
 }
 
-export type apiPactumOptions = {
+export interface apiPactumOptions {
     schema: string,
-    variables?: {},
+    variables?: object,
     logRequest?: boolean,
     logResponse?: boolean,
     mochaContext?: Mocha.Context

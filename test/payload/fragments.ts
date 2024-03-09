@@ -3,7 +3,7 @@ fragment itemsField on Product {
   id
   name
 }
-`
+`;
 export const getProductsWithFragment = `
 ${itemsFragment}
 query {

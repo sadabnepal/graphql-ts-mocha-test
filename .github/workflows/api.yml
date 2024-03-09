@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: graphql test
 
 on:
   push:
@@ -7,12 +7,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  supertest:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
 
     steps:
     - uses: actions/checkout@v3
@@ -22,7 +22,52 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
+    - name: tes using supertest
       run: |
         npm install
-        npm test
+        npm test:super
+    
+    - name: tes using pactum
+      run: |
+        npm install
+        npm test:pactum
+
+  axios:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: tes using axios
+      run: |
+        npm install
+        npm test:axios
+
+  pactum:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: tes using pactum
+      run: |
+        npm install
+        npm test:pactum

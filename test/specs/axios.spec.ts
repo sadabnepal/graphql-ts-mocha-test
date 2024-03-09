@@ -34,7 +34,7 @@ describe('test graphql api using axios', () => {
         });
 
         it('should fetch products by name', async function () {
-            let productName = "Laptop";
+            const productName = 'Laptop';
             const response = await callGraphQlAPIUsingAxios({
                 schema: getProductByName(productName),
                 logRequest: true,
@@ -42,10 +42,10 @@ describe('test graphql api using axios', () => {
                 mochaContext: this
             });
 
-            expect(response.status).equal(200)
-            expect(response.data.data.products.items).to.have.length(1)
+            expect(response.status).equal(200);
+            expect(response.data.data.products.items).to.have.length(1);
         });
-    })
+    });
 
     describe('mutate data', function () {
 
@@ -60,7 +60,7 @@ describe('test graphql api using axios', () => {
                 lastName: lastName,
                 phoneNumber: faker.phone.number(),
                 password: faker.internet.password()
-            }
+            };
 
             const response = await callGraphQlAPIUsingAxios({
                 schema: registerCustomerAccount(customerData),
@@ -70,7 +70,7 @@ describe('test graphql api using axios', () => {
             });
 
             expect(response.status).equal(200);
-            expect(response.data.data.registerCustomerAccount.success).equal(true)
+            expect(response.data.data.registerCustomerAccount.success).equal(true);
         });
 
     });

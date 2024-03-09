@@ -1,7 +1,7 @@
 import { CustomerDetailsType } from '../types/custom';
 
 export const registerCustomerAccount = (customer: CustomerDetailsType) => {
-  return `mutation {
+    return `mutation {
         registerCustomerAccount(input: {
             emailAddress: "${customer.emailAddress}",
             title: "${customer.title}",
@@ -27,5 +27,5 @@ export const registerCustomerAccount = (customer: CustomerDetailsType) => {
             message
           }
         }
-      }`
-}
+      }`;
+};

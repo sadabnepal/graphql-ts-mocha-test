@@ -1,0 +1,27 @@
+{
+    "extensions": [
+        "ts"
+    ],
+    "timeout": 30000,
+    "grep": "",
+    "ignore": [
+        ""
+    ],
+    "recursive": true,
+    "package": "./package.json",
+    "parallel": false,
+    "reporter": [
+        "spec",
+        "mochawesome"
+    ],
+    "reporter-option": [
+        "reportDir=report",
+        "reportFilename=index",
+        "charts=true",
+        "code=false"
+    ],
+    "require": [
+        "ts-node/register"
+    ],
+    "retries": 0
+}

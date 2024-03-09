@@ -9,7 +9,7 @@ export const getProducts = `query {
 }`;
 
 export const getProductByName = (productName: string) => {
-  return `query {
+    return `query {
     products (options:{filter: {name:{eq: "${productName}"}}}) {
       totalItems
       items {
@@ -18,10 +18,10 @@ export const getProductByName = (productName: string) => {
       }
     }
   }`;
-}
+};
 
 export const getProductWithVariable = () => {
-  return `query ($product: String) {
+    return `query ($product: String) {
     products(options: {filter: {name: {eq: $product}}}) {
       totalItems
       items {
@@ -30,4 +30,4 @@ export const getProductWithVariable = () => {
       }
     }
   }`;
-}
+};

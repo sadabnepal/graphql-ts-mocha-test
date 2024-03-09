@@ -12,8 +12,8 @@ This is boilerplate project to show how we can automate graphql api using supert
 Clone Repository
 
 ```bash
-1. git clone https://github.com/sadabnepal/GraphQLTesting.git
-2. Navigate to GraphQLTesting
+1. git clone https://github.com/sadabnepal/graphql-ts-mocha-test.git
+2. Navigate to graphql-ts-mocha-test
 ```
 
 Install the dependencies
